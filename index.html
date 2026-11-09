@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f172a">
+  <title>일본어 플래쉬카드</title>
+  <style>
+    :root{--bg:#f6f7fb;--panel:#fff;--text:#172033;--muted:#667085;--line:#e5e7eb;--primary:#4f46e5;--primary2:#7c3aed;--mark:#f59e0b;--shadow:0 18px 50px rgba(15,23,42,.12)}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,"Segoe UI","Noto Sans KR","Noto Sans JP",sans-serif;background:radial-gradient(circle at top,#eef2ff 0,#f8fafc 44%,#f6f7fb 100%);color:var(--text)}
+    button,input{font:inherit} button{cursor:pointer}.app{width:min(760px,100%);margin:auto;padding:18px;min-height:100vh;display:flex;flex-direction:column}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-weight:850;font-size:18px}.iconbtn{border:1px solid var(--line);background:rgba(255,255,255,.8);border-radius:12px;padding:9px 12px;color:var(--text)}
+    main{flex:1;display:grid;place-items:center}.panel{width:100%;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:var(--shadow);padding:clamp(22px,5vw,44px)}
+    .home{text-align:center}.home h1{font-size:clamp(32px,7vw,54px);margin:0 0 10px;line-height:1.08}.home p{color:var(--muted);margin:0 auto 30px;max-width:520px}.menu{display:grid;grid-template-columns:1fr 1fr;gap:14px}.bigbtn{min-height:118px;border:0;border-radius:20px;color:white;padding:20px;text-align:left;box-shadow:0 12px 24px rgba(79,70,229,.18);transition:.18s}.bigbtn:hover{transform:translateY(-2px)}.bigbtn strong{display:block;font-size:20px;margin-bottom:6px}.bigbtn span{opacity:.85}.all{background:linear-gradient(135deg,var(--primary),var(--primary2))}.marked{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+    .study{display:none;width:100%}.studybar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.badge{color:var(--muted);font-size:14px}.card-wrap{perspective:1200px}.card{height:min(52vh,430px);min-height:310px;position:relative;transform-style:preserve-3d;transition:transform .48s;cursor:pointer}.card.flipped{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:26px;border:1px solid var(--line);background:linear-gradient(145deg,#fff,#f8fafc);box-shadow:var(--shadow);padding:34px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.back{transform:rotateY(180deg);background:linear-gradient(145deg,#fff7ed,#fff)}.label{position:absolute;top:20px;left:22px;color:var(--muted);font-size:13px;font-weight:700;letter-spacing:.06em}.jp{font-family:"Noto Sans JP",system-ui,sans-serif;font-size:clamp(27px,6vw,45px);font-weight:750;line-height:1.45}.ko{font-size:clamp(22px,5vw,34px);line-height:1.5;font-weight:700}.hint{position:absolute;bottom:19px;color:var(--muted);font-size:13px}.controls{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:10px;margin-top:16px}.control{border:1px solid var(--line);border-radius:15px;padding:14px;background:white;font-weight:750}.next{background:var(--primary);color:white;border-color:var(--primary)}.control.on{background:#fff7ed;border-color:#f59e0b;color:#b45309}.empty{text-align:center;padding:30px}.empty h2{margin-top:0}
+    dialog{border:0;border-radius:22px;padding:0;width:min(520px,calc(100% - 28px));box-shadow:var(--shadow)}dialog::backdrop{background:rgba(15,23,42,.55)}.modal{padding:24px}.modal h2{margin-top:0}.field{display:grid;gap:7px;margin:15px 0}.field label{font-weight:700}.field input{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px}.note{font-size:13px;color:var(--muted);line-height:1.5}.actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.status{margin-top:14px;color:var(--muted);font-size:13px;min-height:20px}.error{color:#b42318}.ok{color:#067647}
+    @media(max-width:560px){.menu{grid-template-columns:1fr}.bigbtn{min-height:96px}.controls{grid-template-columns:1fr 1fr}.controls .markbtn{grid-column:1/-1;grid-row:1}.face{padding:26px 20px}.panel{padding:20px;border-radius:22px}}
+
+    /* Mobile-first home screen refinements */
+    button{-webkit-tap-highlight-color:transparent}
+    .app{min-height:100svh;padding:16px}
+    .home h1{font-size:clamp(30px,8vw,48px);margin:0 0 28px;line-height:1.15;letter-spacing:-.03em}
+    .bigbtn:active{transform:scale(.985)}
+    .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+    @media(max-width:560px){
+      body{background:linear-gradient(180deg,#eef2ff 0,#f8fafc 42%,#f6f7fb 100%)}
+      .app{padding:12px;min-height:100svh}
+      main{place-items:start center;padding-top:clamp(18px,8vh,64px)}
+      .panel{padding:24px 16px 18px;border-radius:22px}
+      .home h1{font-size:clamp(28px,9vw,38px);margin-bottom:24px}
+      .menu{grid-template-columns:1fr;gap:12px}
+      .bigbtn{width:100%;min-height:94px;padding:18px;border-radius:18px}
+      .bigbtn strong{font-size:19px}.bigbtn span{font-size:15px;line-height:1.4}
+      .studybar{position:sticky;top:0;z-index:5;padding:4px 0 10px;background:linear-gradient(180deg,#eef2ff 75%,transparent)}
+      .card{height:min(58svh,460px);min-height:300px}
+      .face{padding:28px 18px;border-radius:22px}
+      .jp{font-size:clamp(26px,8vw,38px)}.ko{font-size:clamp(21px,6.5vw,30px)}
+      .controls{grid-template-columns:1fr 1fr;gap:9px;margin-top:12px;padding-bottom:max(4px,env(safe-area-inset-bottom))}
+      .controls .markbtn{grid-column:1/-1;grid-row:1}
+      .control,.iconbtn{min-height:48px}
+    }
+    @media(max-width:360px){.app{padding:8px}.panel{padding:20px 12px}.home h1{font-size:27px}.bigbtn{padding:16px}.face{padding:24px 14px}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <main>
+    <section class="panel home" id="home">
+      <h1>日本語 Flashcards</h1>
+      <div class="menu">
+        <button class="bigbtn all" id="startAll" type="button"><strong>전체 랜덤 학습</strong><span id="allCount">전체 문장 불러오는 중…</span></button>
+        <button class="bigbtn marked" id="startMarked" type="button"><strong>마킹 카드 학습</strong><span id="markedCount">마킹 상태 불러오는 중…</span></button>
+      </div>
+      <div id="homeStatus" class="status sr-only" aria-live="polite"></div>
+    </section>
+
+    <section class="study" id="study">
+      <div class="studybar"><button class="iconbtn" id="backBtn" type="button">← 홈</button><span class="badge" id="progress"></span></div>
+      <div id="cardArea"></div>
+      <div class="controls" id="controls" hidden>
+        <button class="control" id="prevBtn" type="button">이전</button>
+        <button class="control markbtn" id="markBtn" type="button">☆ 헷갈림 표시</button>
+        <button class="control next" id="nextBtn" type="button">다음</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog id="settingsDialog">
+  <form class="modal" id="settingsForm">
+    <h2>Supabase 연결 설정</h2>
+    <p class="note">Project URL과 Publishable key 또는 anon key를 입력하세요. 값은 이 브라우저에만 저장됩니다. Service role key는 절대 입력하지 마세요.</p>
+    <div class="field"><label for="urlInput">Project URL</label><input id="urlInput" type="url" placeholder="https://xxxx.supabase.co" required></div>
+    <div class="field"><label for="keyInput">Publishable / anon key</label><input id="keyInput" type="password" placeholder="sb_publishable_... 또는 eyJ..." required></div>
+    <div class="actions"><button class="iconbtn" id="cancelSettings" type="button">취소</button><button class="control next" type="submit">저장하고 연결</button></div>
+  </form>
+</dialog>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const TABLE='일본어 플래쉬카드';
+const MARK_TABLE='일본어 플래쉬카드 마킹';
+const $=s=>document.querySelector(s);
+const state={client:null,cards:[],marked:new Set(),deck:[],index:0,mode:'all'};
+const ui={home:$('#home'),study:$('#study'),cardArea:$('#cardArea'),controls:$('#controls'),progress:$('#progress'),markBtn:$('#markBtn'),status:$('#homeStatus'),dialog:$('#settingsDialog')};
+
+function config(){return {url:'https://wgwlnutnstrfuiiunlcu.supabase.co',key:'sb_publishable_iC7kbinoy61_5eQCnrV25Q_OioA7Y1x'}}
+function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function setStatus(msg,type=''){ui.status.textContent=msg;ui.status.className='status '+type}
+async function connect(){
+  const {url,key}=config();
+  if(!url||!key){openSettings();setStatus('먼저 Supabase 연결 정보를 입력하세요.');return}
+  try{
+    state.client=createClient(url,key);
+    let {data:{session}}=await state.client.auth.getSession();
+    if(!session){const {error}=await state.client.auth.signInAnonymously();if(error)throw error}
+    await loadData();setStatus('');
+  }catch(e){console.error(e);setStatus('연결 실패: '+(e.message||e),'error')}
+}
+async function loadData(){
+  const [{data:cards,error:e1},{data:marks,error:e2}]=await Promise.all([
+    state.client.from(TABLE).select('id,일본어,뜻').order('id'),
+    state.client.from(MARK_TABLE).select('card_id').eq('marked',true)
+  ]);
+  if(e1)throw e1;if(e2)throw e2;
+  state.cards=cards||[];state.marked=new Set((marks||[]).map(x=>x.card_id));updateCounts();
+}
+function updateCounts(){
+  $('#allCount').textContent=`${state.cards.length}개 문장 중 무작위`;
+  $('#markedCount').textContent=`${state.marked.size}개 마킹 문장 중 무작위`;
+}
+function start(mode){
+  state.mode=mode;const source=mode==='marked'?state.cards.filter(c=>state.marked.has(c.id)):state.cards;
+  state.deck=shuffle(source);state.index=0;ui.home.style.display='none';ui.study.style.display='block';render();
+}
+function render(){
+  if(!state.deck.length){ui.controls.hidden=true;ui.progress.textContent='';ui.cardArea.innerHTML=`<div class="panel empty"><h2>${state.mode==='marked'?'마킹된 문장이 없습니다':'문장이 없습니다'}</h2><p>${state.mode==='marked'?'전체 학습에서 ☆ 버튼으로 문장을 마킹해 주세요.':'Supabase 테이블과 CSV 업로드 상태를 확인해 주세요.'}</p></div>`;return}
+  const c=state.deck[state.index];ui.progress.textContent=`${state.index+1} / ${state.deck.length}`;ui.controls.hidden=false;
+  ui.cardArea.innerHTML=`<div class="card-wrap"><article class="card" id="flashcard" tabindex="0" role="button" aria-label="카드 뒤집기"><div class="face front"><span class="label">JAPANESE</span><div class="jp"></div><span class="hint">클릭해서 뜻 보기</span></div><div class="face back"><span class="label">MEANING</span><div class="ko"></div><span class="hint">클릭해서 일본어 보기</span></div></article></div>`;
+  ui.cardArea.querySelector('.jp').textContent=c['일본어'];ui.cardArea.querySelector('.ko').textContent=c['뜻'];
+  const card=$('#flashcard');const flip=()=>card.classList.toggle('flipped');card.addEventListener('click',flip);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}});
+  ui.markBtn.classList.toggle('on',state.marked.has(c.id));ui.markBtn.textContent=state.marked.has(c.id)?'★ 마킹됨':'☆ 헷갈림 표시';
+}
+async function toggleMark(){
+  if(!state.deck.length)return;const c=state.deck[state.index],active=state.marked.has(c.id);
+  ui.markBtn.disabled=true;
+  try{
+    if(active){const {error}=await state.client.from(MARK_TABLE).delete().eq('card_id',c.id);if(error)throw error;state.marked.delete(c.id)}
+    else{const {error}=await state.client.from(MARK_TABLE).upsert({card_id:c.id,marked:true},{onConflict:'user_id,card_id'});if(error)throw error;state.marked.add(c.id)}
+    updateCounts();
+    if(state.mode==='marked'&&active){state.deck.splice(state.index,1);if(state.index>=state.deck.length)state.index=Math.max(0,state.deck.length-1)}
+    render();
+  }catch(e){alert('마킹 저장 실패: '+(e.message||e))}finally{ui.markBtn.disabled=false}
+}
+function move(step){if(!state.deck.length)return;state.index=(state.index+step+state.deck.length)%state.deck.length;render()}
+function home(){ui.study.style.display='none';ui.home.style.display='block';updateCounts()}
+function openSettings(){const c=config();$('#urlInput').value=c.url;$('#keyInput').value=c.key;ui.dialog.showModal()}
+$('#cancelSettings').addEventListener('click',()=>ui.dialog.close());
+$('#settingsForm').addEventListener('submit',async e=>{e.preventDefault();localStorage.setItem('jpfc_url',$('#urlInput').value.trim());localStorage.setItem('jpfc_key',$('#keyInput').value.trim());ui.dialog.close();await connect()});
+$('#startAll').addEventListener('click',()=>start('all'));$('#startMarked').addEventListener('click',()=>start('marked'));$('#backBtn').addEventListener('click',home);$('#prevBtn').addEventListener('click',()=>move(-1));$('#nextBtn').addEventListener('click',()=>move(1));$('#markBtn').addEventListener('click',toggleMark);
+document.addEventListener('keydown',e=>{if(ui.study.style.display!=='block')return;if(e.key==='ArrowRight')move(1);if(e.key==='ArrowLeft')move(-1)});
+connect();
+</script>
+</body>
+</html>
